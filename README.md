@@ -12,12 +12,12 @@
 </head>
 <body id="top">
   <div id="space-backdrop" aria-hidden="true"></div>
-  <canvas id="star-motion" aria-hidden="true" width="1735" height="1285"></canvas>
+  <canvas id="star-motion" aria-hidden="true" width="1118" height="1355"></canvas>
   <a class="skip-link" href="#main">Skip to content</a>
   <div id="portfolio-screen">
-  <header class="header wrap">
+  <div id="header-space" aria-hidden="true"></div><header class="header wrap is-compact">
     <a class="brand" href="#top" aria-label="Portfolio home"><span class="mark" aria-hidden="true">EA</span><span data-edit="field-0">Eren Ayaz</span></a>
-    <nav aria-label="Main navigation"><a href="#about" data-route="about" aria-current="location">About me</a><a href="#projects" data-route="projects">My work</a><a href="#contact" data-route="contact">Contact</a></nav>
+    <nav aria-label="Main navigation"><a href="#about" data-route="about">About me</a><a href="#projects" data-route="projects">My work</a><a href="#contact" data-route="contact" aria-current="location">Contact</a></nav>
   </header>
   <main id="main"><div class="intro-layout" id="about"><section id="home" class="hero wrap" data-view="about">
       <p class="eyebrow" data-edit="field-1">Programming <span>/</span> 3D modeling</p>
@@ -265,6 +265,21 @@
 <style id="single-page-styles">
     html{scroll-behavior:smooth;scroll-padding-top:2rem}.intro-layout{display:grid;grid-template-columns:1.12fr 1fr;gap:3.5rem;max-width:1200px;width:calc(100% - 6rem);margin:0 auto;padding-top:4.5rem;align-items:start}.intro-layout .hero.wrap,.intro-layout .about.wrap{width:100%;margin:0}#projects{padding-block:5rem;border-bottom:1px solid var(--line)}#contact{padding-bottom:4rem}.header nav a[aria-current="location"]{color:#fff4ff;border-color:#f2cef9}.header nav a[aria-current="location"]:after{content:'';position:absolute;bottom:-7px;left:calc(50% - 4px);width:8px;height:8px;background:#fff0ff;transform:rotate(45deg)}@media(max-width:1000px){.intro-layout{gap:2rem;width:calc(100% - 4rem)}}@media(max-width:760px){.intro-layout{display:block;width:calc(100% - 2.5rem);padding-top:2.3rem}.intro-layout .about.wrap{margin-top:2.2rem}#projects{padding-block:3rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   </style>
+<style id="compact-header-styles">
+  :root{--header-height:148px;--header-compact-height:70px}html{scroll-padding-top:calc(var(--header-compact-height) + 24px)}#header-space{height:var(--header-height);pointer-events:none}.header.wrap{position:fixed;top:0;left:0;right:0;z-index:15;width:100%;height:var(--header-height);min-height:0;display:flex;align-items:center;justify-content:space-between;flex-wrap:nowrap;gap:2rem;padding:1.6rem max(2rem,calc((100vw - 1200px)/2));border-radius:0 0 42px 42px;transition:height .22s ease,padding .22s ease,border-radius .22s ease,box-shadow .22s ease;backdrop-filter:blur(18px)}.header .brand{font-size:clamp(2.4rem,4vw,3.5rem);line-height:1.1;transition:font-size .22s ease}.header nav{width:auto;margin:0;padding:0;display:flex;gap:1.8rem}.header nav a{font-size:1rem;padding:.6rem 0}.header.is-compact{height:var(--header-compact-height);padding:.7rem max(2rem,calc((100vw - 1200px)/2));border-radius:0 0 22px 22px;background:linear-gradient(115deg,#654082f5,#412954f5);box-shadow:0 8px 25px #0005}.header.is-compact .brand{font-size:1.6rem}.header.is-compact nav a{font-size:.9rem}.intro-layout{padding-top:3rem}.skip-link{z-index:30}@media(max-width:760px){:root{--header-height:142px;--header-compact-height:96px}.header.wrap{display:flex;flex-direction:column;justify-content:center;gap:1rem;padding:1.2rem 1.3rem;border-radius:0 0 30px 30px}.header .brand{font-size:2.3rem}.header nav{width:100%;justify-content:center;gap:1.7rem;margin:0;padding:0}.header nav a{font-size:.9rem;padding:.45rem .15rem}.header.is-compact{padding:.65rem 1rem;gap:.3rem;border-radius:0 0 18px 18px}.header.is-compact .brand{font-size:1.35rem}.header.is-compact nav a{font-size:.85rem}.intro-layout{padding-top:2rem}}@media(prefers-reduced-motion:reduce){.header.wrap,.header .brand{transition:none}}
+</style>
+<script id="compact-header-script">
+  (()=>{
+    const header=document.querySelector('.header');
+    if(!header)return;
+    let spacer=document.getElementById('header-space');
+    if(!spacer){spacer=document.createElement('div');spacer.id='header-space';spacer.setAttribute('aria-hidden','true');header.before(spacer);}
+    let scheduled=false;
+    function update(){scheduled=false;header.classList.toggle('is-compact',scrollY>64);}
+    window.addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(update);}},{passive:true});
+    window.addEventListener('pageshow',update);update();
+  })();
+</script>
 
 
 </body><div id="codex-browser-sidebar-comments-root" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483647;"></div></html>
